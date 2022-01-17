@@ -1,6 +1,6 @@
 package cn.iris.server.service;
 
-import cn.iris.pojo.AdminRole;
+import cn.iris.server.pojo.AdminRole;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

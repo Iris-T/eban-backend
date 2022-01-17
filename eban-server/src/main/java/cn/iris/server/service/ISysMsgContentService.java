@@ -1,6 +1,6 @@
 package cn.iris.server.service;
 
-import cn.iris.pojo.SysMsgContent;
+import cn.iris.server.pojo.SysMsgContent;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

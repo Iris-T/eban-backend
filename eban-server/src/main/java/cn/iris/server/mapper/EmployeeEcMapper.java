@@ -1,6 +1,6 @@
 package cn.iris.server.mapper;
 
-import cn.iris.pojo.EmployeeEc;
+import cn.iris.server.pojo.EmployeeEc;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

@@ -1,6 +1,6 @@
 package cn.iris.server.service;
 
-import cn.iris.pojo.PoliticsStatus;
+import cn.iris.server.pojo.PoliticsStatus;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

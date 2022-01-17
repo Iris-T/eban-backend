@@ -1,6 +1,6 @@
 package cn.iris.server.service;
 
-import cn.iris.pojo.MenuRole;
+import cn.iris.server.pojo.MenuRole;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

@@ -76,7 +76,7 @@ public class CodeGenerator {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("cn.iris")
+        pc.setParent("cn.iris.server")
                 .setEntity("pojo")
                 .setMapper("mapper")
                 .setService("service")

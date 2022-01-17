@@ -1,6 +1,6 @@
 package cn.iris.server.service;
 
-import cn.iris.pojo.Oplog;
+import cn.iris.server.pojo.Oplog;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

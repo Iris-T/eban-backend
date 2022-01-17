@@ -1,6 +1,6 @@
 package cn.iris.server.mapper;
 
-import cn.iris.pojo.PoliticsStatus;
+import cn.iris.server.pojo.PoliticsStatus;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

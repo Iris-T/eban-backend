@@ -1,6 +1,6 @@
 package cn.iris.server.mapper;
 
-import cn.iris.pojo.Salary;
+import cn.iris.server.pojo.Salary;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

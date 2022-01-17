@@ -1,6 +1,6 @@
 package cn.iris.server.mapper;
 
-import cn.iris.pojo.Oplog;
+import cn.iris.server.pojo.Oplog;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

@@ -1,6 +1,6 @@
 package cn.iris.server.service;
 
-import cn.iris.pojo.Nation;
+import cn.iris.server.pojo.Nation;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

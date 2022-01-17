@@ -1,6 +1,6 @@
 package cn.iris.server.service;
 
-import cn.iris.pojo.Position;
+import cn.iris.server.pojo.Position;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
