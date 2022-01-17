@@ -1,40 +1,39 @@
 server:
   port: 8081
+
 spring:
   datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/eban?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: 123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/eban?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    #连接池配置
     hikari:
-      # ????
-      pool-name: DateHikariCP
-      # ???????
-      minimum-idle: 5
-      # ??????????(???6*10^5,10??)
-      idle-timeout: 180000
-      # ?????
-      maximum-pool-size: 10
-      # ?????????????
-      auto-commit: true
-      # ????????(0:????;???1.8*10^6,30??)
-      max-lifetime: 1800000
-      # ??????(???30000,3??)
-      connection-timeout: 30000
-      # ?????????????
-      connection-test-query: SELECT 1
+      pool-name: DateHikariCP   #连接池名
+      minimum-idle: 5           #最小连接数
+      maximum-pool-size: 10     #最大连接数
+      idle-timeout: 180000      #空闲链接最大存活时间
+      max-lifetime: 1800000     #链接最大存活时间，0表示永久存活
+      auto-commit: true         #从连接池返回的链接自动提交
+      connection-timeout: 3000  #链接超时时间
+      connection-test-query: SELECT 1   #测试链接是否可用的查询语句
 
-# mybatis-plus??
 mybatis-plus:
-  # mapper????
-  mapper-location: classpath*:/mapper/*Mapper.xml
-  # mybatis?????????
-  type-aliases-package: cn.iris.server.pojo
+  #配置Mapper映射文件
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  #配置Mybatis数据返回类型别名（默认别名为类名）
+  type-aliases-package: com.jiayuge.server.pojo
   configuration:
-    # ??????
+    #自动驼峰命名
     map-underscore-to-camel-case: false
 
-# Mybatis SQL??(????????,??Mapper.xml????)
+##Mybatis SQL 打印（方法接口所在的包,不是Mapper.xml所在的包）
 logging:
   level:
-    cn.iris.server.mapper: debug
+    com.jiayuge.server.mapper: debug
+
+jwt:
+  tokenHeader: Authorization  #JWT 存储的请求头
+  secret: eban-secret-by-iris #JWT 加密使用的密钥
+  expiration: 604800          #JWT 超限时间
+  tokenHead: Bearer           #JWT 负载中的开头
