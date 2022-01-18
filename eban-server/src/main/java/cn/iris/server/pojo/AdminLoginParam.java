@@ -13,12 +13,14 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode
 @Accessors(chain = true)
-@ApiModel(value = "AdminLogin对象", description = "")
+@ApiModel(value = "AdminLogin对象", description = "登录信息对象")
 public class AdminLoginParam {
 
     @ApiModelProperty(value = "用户名",required = true)
     private String userName;
     @ApiModelProperty(value = "密码",required = true)
     private String password;
+    @ApiModelProperty(value = "验证码",required = true)
+    private String code;
 
 }

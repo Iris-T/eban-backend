@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -46,11 +48,19 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
      * 登陆后返回Token
      * @param userName
      * @param password
-     * @param req
+     * @param code
+     * @param request
      * @return
      */
     @Override
-    public RespBean login(String userName, String password, HttpServletRequest req) {
+    public RespBean login(String userName, String password, String code, HttpServletRequest request) {
+        // 获取Session中的code
+        String captcha = (String) request.getSession().getAttribute("captcha");
+        System.out.println(ObjectUtils.isEmpty(code) || !captcha.equalsIgnoreCase(code));
+        // 字符串为空（null or "" " "）或验证码不匹配
+        if (ObjectUtils.isEmpty(code) || !captcha.equalsIgnoreCase(code)) {
+            return RespBean.error("验证码输入错误，请重新输入!");
+        }
         // 登录
         UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
         // 登录合法性判断
@@ -62,8 +72,6 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         }
 
         // 更新Security登录用户对象
-        Object userDetails1;
-        Object principal;
         UsernamePasswordAuthenticationToken authToken = new
                 UsernamePasswordAuthenticationToken(userDetails,
                 null, userDetails.getAuthorities());

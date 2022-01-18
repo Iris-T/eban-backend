@@ -20,15 +20,15 @@ import java.security.Principal;
  */
 @Api(tags = "LoginController")
 @RestController
-public class LoginCotroller {
+public class LoginController {
 
     @Autowired
     private IAdminService adminService;
 
     @ApiOperation(value = "登录后返回Token")
     @PostMapping("/login")
-    public RespBean login(@RequestBody AdminLoginParam authParam, HttpServletRequest req) {
-        return adminService.login(authParam.getUserName(), authParam.getPassword(), req);
+    public RespBean login(@RequestBody AdminLoginParam adminLoginParam, HttpServletRequest request) {
+        return adminService.login(adminLoginParam.getUserName(), adminLoginParam.getPassword(), adminLoginParam.getCode(), request);
     }
 
     @ApiOperation(value = "获取当前登录用户信息")
