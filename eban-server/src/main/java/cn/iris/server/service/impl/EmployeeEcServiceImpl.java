@@ -1,7 +1,7 @@
 package cn.iris.server.service.impl;
 
-import cn.iris.pojo.EmployeeEc;
-import cn.iris.mapper.EmployeeEcMapper;
+import cn.iris.server.pojo.EmployeeEc;
+import cn.iris.server.mapper.EmployeeEcMapper;
 import cn.iris.server.service.IEmployeeEcService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

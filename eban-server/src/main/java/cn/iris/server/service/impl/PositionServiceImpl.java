@@ -1,7 +1,7 @@
 package cn.iris.server.service.impl;
 
-import cn.iris.pojo.Position;
-import cn.iris.mapper.PositionMapper;
+import cn.iris.server.pojo.Position;
+import cn.iris.server.mapper.PositionMapper;
 import cn.iris.server.service.IPositionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

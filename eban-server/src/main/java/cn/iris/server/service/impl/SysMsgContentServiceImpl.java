@@ -1,7 +1,7 @@
 package cn.iris.server.service.impl;
 
-import cn.iris.pojo.SysMsgContent;
-import cn.iris.mapper.SysMsgContentMapper;
+import cn.iris.server.pojo.SysMsgContent;
+import cn.iris.server.mapper.SysMsgContentMapper;
 import cn.iris.server.service.ISysMsgContentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

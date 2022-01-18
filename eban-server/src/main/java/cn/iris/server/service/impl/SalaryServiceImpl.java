@@ -1,7 +1,7 @@
 package cn.iris.server.service.impl;
 
-import cn.iris.pojo.Salary;
-import cn.iris.mapper.SalaryMapper;
+import cn.iris.server.pojo.Salary;
+import cn.iris.server.mapper.SalaryMapper;
 import cn.iris.server.service.ISalaryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
