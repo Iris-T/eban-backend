@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -34,6 +35,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        // 放行资源
+        web.ignoring().antMatchers(
+                "/login",
+                "/logout",
+                "/css/**",
+                "/js/**",
+                "/index.html",
+                "favicon.ico",
+                "/doc.html",
+                "/webjars/**",
+                "/swagger-resources/**",
+                "/v2/api-docs/**"
+        );
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         // 使用jwt不需要使用csrf
         http.csrf()
@@ -43,10 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                // 允许登录访问
-                .antMatchers("/login","/logout")
-                .permitAll()
-                //  除了允许访问的请求，其他都要求认证
+                // 所有请求均要求认证
                 .anyRequest()
                 .authenticated()
                 .and()

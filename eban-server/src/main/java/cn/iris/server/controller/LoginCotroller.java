@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,7 @@ public class LoginCotroller {
 
     @ApiOperation(value = "登录后返回Token")
     @PostMapping("/login")
-    public RespBean login(AdminLoginParam authParam, HttpServletRequest req) {
+    public RespBean login(@RequestBody AdminLoginParam authParam, HttpServletRequest req) {
         return adminService.login(authParam.getUserName(), authParam.getPassword(), req);
     }
 
