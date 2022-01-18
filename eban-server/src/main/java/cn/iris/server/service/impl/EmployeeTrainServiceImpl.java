@@ -1,7 +1,7 @@
 package cn.iris.server.service.impl;
 
-import cn.iris.pojo.EmployeeTrain;
-import cn.iris.mapper.EmployeeTrainMapper;
+import cn.iris.server.pojo.EmployeeTrain;
+import cn.iris.server.mapper.EmployeeTrainMapper;
 import cn.iris.server.service.IEmployeeTrainService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package cn.iris.server.service.impl;
 
-import cn.iris.pojo.Oplog;
-import cn.iris.mapper.OplogMapper;
+import cn.iris.server.pojo.Oplog;
+import cn.iris.server.mapper.OplogMapper;
 import cn.iris.server.service.IOplogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

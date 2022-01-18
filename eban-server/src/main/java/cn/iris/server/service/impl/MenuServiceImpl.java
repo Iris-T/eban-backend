@@ -1,7 +1,7 @@
 package cn.iris.server.service.impl;
 
-import cn.iris.pojo.Menu;
-import cn.iris.mapper.MenuMapper;
+import cn.iris.server.pojo.Menu;
+import cn.iris.server.mapper.MenuMapper;
 import cn.iris.server.service.IMenuService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

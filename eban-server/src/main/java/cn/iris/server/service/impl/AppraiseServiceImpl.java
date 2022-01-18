@@ -1,7 +1,7 @@
 package cn.iris.server.service.impl;
 
-import cn.iris.pojo.Appraise;
-import cn.iris.mapper.AppraiseMapper;
+import cn.iris.server.pojo.Appraise;
+import cn.iris.server.mapper.AppraiseMapper;
 import cn.iris.server.service.IAppraiseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

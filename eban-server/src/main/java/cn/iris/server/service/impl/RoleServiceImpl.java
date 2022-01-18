@@ -1,7 +1,7 @@
 package cn.iris.server.service.impl;
 
-import cn.iris.pojo.Role;
-import cn.iris.mapper.RoleMapper;
+import cn.iris.server.pojo.Role;
+import cn.iris.server.mapper.RoleMapper;
 import cn.iris.server.service.IRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

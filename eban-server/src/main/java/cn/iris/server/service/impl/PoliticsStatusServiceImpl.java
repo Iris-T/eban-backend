@@ -1,7 +1,7 @@
 package cn.iris.server.service.impl;
 
-import cn.iris.pojo.PoliticsStatus;
-import cn.iris.mapper.PoliticsStatusMapper;
+import cn.iris.server.pojo.PoliticsStatus;
+import cn.iris.server.mapper.PoliticsStatusMapper;
 import cn.iris.server.service.IPoliticsStatusService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

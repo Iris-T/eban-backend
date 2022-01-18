@@ -1,7 +1,7 @@
 package cn.iris.server.service.impl;
 
-import cn.iris.pojo.Department;
-import cn.iris.mapper.DepartmentMapper;
+import cn.iris.server.pojo.Department;
+import cn.iris.server.mapper.DepartmentMapper;
 import cn.iris.server.service.IDepartmentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

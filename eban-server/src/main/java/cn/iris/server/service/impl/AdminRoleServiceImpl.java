@@ -1,7 +1,7 @@
 package cn.iris.server.service.impl;
 
-import cn.iris.pojo.AdminRole;
-import cn.iris.mapper.AdminRoleMapper;
+import cn.iris.server.pojo.AdminRole;
+import cn.iris.server.mapper.AdminRoleMapper;
 import cn.iris.server.service.IAdminRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package cn.iris.server.service.impl;
 
-import cn.iris.pojo.SalaryAdjust;
-import cn.iris.mapper.SalaryAdjustMapper;
+import cn.iris.server.pojo.SalaryAdjust;
+import cn.iris.server.mapper.SalaryAdjustMapper;
 import cn.iris.server.service.ISalaryAdjustService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
