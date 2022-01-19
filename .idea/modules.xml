@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/eban-backend.iml" filepath="$PROJECT_DIR$/eban-backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eban-generator/eban-generator.iml" filepath="$PROJECT_DIR$/eban-generator/eban-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eban-server/eban-server.iml" filepath="$PROJECT_DIR$/eban-server/eban-server.iml" />
+    </modules>
+  </component>
+</project>
