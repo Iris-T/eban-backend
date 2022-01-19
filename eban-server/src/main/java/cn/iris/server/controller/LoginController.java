@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 /**
- * @author Iris 2022/1/17
+ * 登录接口
+ * @author Iris 2022/1/19
  */
 @Api(tags = "LoginController")
 @RestController
@@ -27,8 +28,8 @@ public class LoginController {
 
     @ApiOperation(value = "登录后返回Token")
     @PostMapping("/login")
-    public RespBean login(@RequestBody AdminLoginParam adminLoginParam, HttpServletRequest request) {
-        return adminService.login(adminLoginParam.getUserName(), adminLoginParam.getPassword(), adminLoginParam.getCode(), request);
+    public RespBean login(@RequestBody AdminLoginParam adminLoginParam, HttpServletRequest req) {
+        return adminService.login(adminLoginParam.getUserName(), adminLoginParam.getPassword(), adminLoginParam.getCode(), req);
     }
 
     @ApiOperation(value = "获取当前登录用户信息")
@@ -49,5 +50,6 @@ public class LoginController {
     public RespBean logout() {
         return RespBean.success("注销成功!");
     }
+
 
 }

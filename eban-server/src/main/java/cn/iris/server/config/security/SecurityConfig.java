@@ -1,4 +1,4 @@
-package cn.iris.server.config.sercurity;
+package cn.iris.server.config.security;
 
 import cn.iris.server.pojo.Admin;
 import cn.iris.server.service.IAdminService;
@@ -35,8 +35,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        // 使用jwt不需要使用csrf
+        http.csrf()
+                .disable()
+                // 基于Token不需要Session
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                //  所有请求均要求认证
+                .anyRequest()
+                .authenticated()
+                .and()
+                .headers()
+                .cacheControl();
+        // 添加Jwt登录授权过滤器
+        http.addFilterBefore(jwtAuthTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        // 添加自定义未授权和未登录结果返回
+        http.exceptionHandling()
+                .accessDeniedHandler(restAccessDeniedHandler)
+                .authenticationEntryPoint(restAuthEntryPoint);
+
+    }
+
+    @Override
     public void configure(WebSecurity web) throws Exception {
-        // 放行资源
         web.ignoring().antMatchers(
                 "/login",
                 "/logout",
@@ -48,34 +72,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/webjars/**",
                 "/swagger-resources/**",
                 "/v2/api-docs/**",
-                "/kaptcha"
+                "/captcha"
         );
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        // 使用jwt不需要使用csrf
-        http.csrf()
-                .disable()
-                // 基于Token不需要Session
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                // 所有请求均要求认证
-                .anyRequest()
-                .authenticated()
-                .and()
-                // 禁用缓存
-                .headers()
-                .cacheControl();
-
-        // 添加Jwt登录授权过滤器
-        http.addFilterBefore(jwtAuthTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-        // 添加自定义未授权和未登录结果返回
-        http.exceptionHandling()
-                .accessDeniedHandler(restAccessDeniedHandler)
-                .authenticationEntryPoint(restAuthEntryPoint);
     }
 
     @Override

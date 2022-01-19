@@ -1,4 +1,4 @@
-package cn.iris.server.config.sercurity;
+package cn.iris.server.config.security;
 
 import cn.iris.server.pojo.RespBean;
 import com.fasterxml.jackson.databind.ObjectMapper;

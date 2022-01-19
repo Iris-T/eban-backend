@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 公共返回对象
- * @author Iris 2022/1/17
+ * 公共响应类
+ * @author Iris 2022/1/19
  */
 @Data
 @NoArgsConstructor
@@ -19,7 +19,7 @@ public class RespBean {
 
     /**
      * 成功返回结果
-     * @param message
+     * @param message 返回响应信息
      */
     public static RespBean success(String message) {
         return new RespBean(200, message, null);
@@ -27,9 +27,9 @@ public class RespBean {
 
     /**
      * 成功返回结果
-     * @param message
-     * @param obj
-     * @return
+     * @param message 响应信息
+     * @param obj 响应对象
+     * @return 返回响应信息和对象
      */
     public static RespBean success(String message, Object obj) {
         return new RespBean(200, message, obj);
@@ -37,8 +37,8 @@ public class RespBean {
 
     /**
      * 失败返回结果
-     * @param message
-     * @return
+     * @param message 响应信息
+     * @return 返回响应信息
      */
     public static RespBean error(String message) {
         return new RespBean(500, message, null);
@@ -46,9 +46,9 @@ public class RespBean {
 
     /**
      * 失败返回结果
-     * @param message
-     * @param obj
-     * @return
+     * @param message 响应信息
+     * @param obj 响应对象
+     * @return 返回响应信息和对象
      */
     public static RespBean error(String message, Object obj) {
         return new RespBean(500, message, obj);

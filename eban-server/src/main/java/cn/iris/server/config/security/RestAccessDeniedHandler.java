@@ -1,8 +1,7 @@
-package cn.iris.server.config.sercurity;
+package cn.iris.server.config.security;
 
 import cn.iris.server.pojo.RespBean;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
