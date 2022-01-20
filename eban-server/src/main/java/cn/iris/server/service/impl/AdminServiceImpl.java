@@ -3,6 +3,7 @@ package cn.iris.server.service.impl;
 import cn.iris.server.pojo.Admin;
 import cn.iris.server.mapper.AdminMapper;
 import cn.iris.server.config.security.JwtTokenUtil;
+import cn.iris.server.pojo.Menu;
 import cn.iris.server.pojo.RespBean;
 import cn.iris.server.service.IAdminService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -19,6 +20,7 @@ import org.springframework.util.ObjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,7 +56,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         // 登录
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         // 登录合法性判断
-        if (null==userDetails || passwordEncoder.matches(password, userDetails.getPassword())) {
+        if (null==userDetails || !passwordEncoder.matches(password, userDetails.getPassword())) {
             return RespBean.error("用户名或密码不正确");
         }
         if (!userDetails.isEnabled()) {
@@ -72,7 +74,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
-        return RespBean.success("登陆成功", tokenMap);
+        return RespBean.success("登录成功", tokenMap);
     }
 
     /**

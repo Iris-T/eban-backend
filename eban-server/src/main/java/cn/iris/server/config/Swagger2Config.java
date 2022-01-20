@@ -38,7 +38,7 @@ public class Swagger2Config {
         return new ApiInfoBuilder()
                 .title("云e办后端API")
                 .description("后端服务接口")
-                .contact(new Contact("Iris", "https:localhost:8082/doc.html", "foxiris@qq.com"))
+                .contact(new Contact("Iris", "http:localhost:8082/doc.html", "foxiris@qq.com"))
                 .version("0.1.0")
                 .build();
     }

@@ -48,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
+                // 禁用缓存
                 .headers()
                 .cacheControl();
         // 添加Jwt登录授权过滤器
@@ -56,7 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling()
                 .accessDeniedHandler(restAccessDeniedHandler)
                 .authenticationEntryPoint(restAuthEntryPoint);
-
     }
 
     @Override

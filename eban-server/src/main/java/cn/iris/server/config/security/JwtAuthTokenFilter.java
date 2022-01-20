@@ -38,7 +38,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
             String authToken = authHeader.substring(this.tokenHead.length());
             String username = jwtTokenUtil.getUserNameByToken(authToken);
             // 用户有效但未登录
-            if (null!=username && null== SecurityContextHolder.getContext().getAuthentication()) {
+            if (null!=username && null==SecurityContextHolder.getContext().getAuthentication()) {
                 // 登录
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
                 // 验证Token有效性，重新设置用户对象

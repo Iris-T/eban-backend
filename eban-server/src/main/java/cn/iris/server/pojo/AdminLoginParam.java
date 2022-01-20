@@ -11,13 +11,13 @@ import lombok.experimental.Accessors;
  * @author Iris 2022/1/19
  */
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "Admin登录对象", description = "用于Admin登录认证")
 public class AdminLoginParam {
 
     @ApiModelProperty(value = "用户名",required = true)
-    private String userName;
+    private String username;
     @ApiModelProperty(value = "密码",required = true)
     private String password;
     @ApiModelProperty(value = "验证码",required = true)

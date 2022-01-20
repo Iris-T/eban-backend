@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 8888
 
 spring:
   datasource:
@@ -34,6 +34,6 @@ logging:
 
 jwt:
   tokenHeader: Authorization  #JWT 存储的请求头
-  secret: yeb-secret #JWT 加密使用的密钥
+  secret: eban-secret-by-iris #JWT 加密使用的密钥
   expiration: 604800          #JWT 超限时间
   tokenHead: Bearer           #JWT 负载中的开头

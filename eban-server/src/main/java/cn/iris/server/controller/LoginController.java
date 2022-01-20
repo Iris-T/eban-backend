@@ -29,13 +29,13 @@ public class LoginController {
     @ApiOperation(value = "登录后返回Token")
     @PostMapping("/login")
     public RespBean login(@RequestBody AdminLoginParam adminLoginParam, HttpServletRequest req) {
-        return adminService.login(adminLoginParam.getUserName(), adminLoginParam.getPassword(), adminLoginParam.getCode(), req);
+        return adminService.login(adminLoginParam.getUsername(), adminLoginParam.getPassword(), adminLoginParam.getCode(), req);
     }
 
     @ApiOperation(value = "获取当前登录用户信息")
     @GetMapping("/admin/info")
     public Admin getAdminInfo(Principal principal) {
-        if (null==principal) {
+        if (null == principal) {
             return null;
         }
         String username = principal.getName();
