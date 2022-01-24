@@ -62,8 +62,11 @@ public class Menu implements Serializable {
     private Boolean enabled;
 
     @ApiModelProperty(value = "子菜单")
-    // 添加注释，避免mybatis进行扫描
     @TableField(exist = false)
     private List<Menu> children;
+
+    @ApiModelProperty(value = "角色列表")
+    @TableField(exist = false)
+    private List<Role> roles;
 
 }

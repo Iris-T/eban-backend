@@ -1,10 +1,11 @@
 package cn.iris.server.service.impl;
 
+import cn.iris.server.mapper.RoleMapper;
 import cn.iris.server.pojo.Admin;
 import cn.iris.server.mapper.AdminMapper;
-import cn.iris.server.config.security.JwtTokenUtil;
-import cn.iris.server.pojo.Menu;
+import cn.iris.server.config.component.JwtTokenUtil;
 import cn.iris.server.pojo.RespBean;
+import cn.iris.server.pojo.Role;
 import cn.iris.server.service.IAdminService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -44,6 +45,8 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     private JwtTokenUtil jwtTokenUtil;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
+    @Autowired
+    private RoleMapper roleMapper;
 
     @Override
     public RespBean login(String username, String password, String code, HttpServletRequest req) {
@@ -89,5 +92,15 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
                         .eq("username", username)
                         // 用户是否被禁
                         .eq("enabled", true));
+    }
+
+    /**
+     * 根据用户ID查询角色列表
+     * @param adminId 用户ID
+     * @return 角色列表
+     */
+    @Override
+    public List<Role> getRoles(Integer adminId) {
+        return roleMapper.getRoles(adminId);
     }
 }

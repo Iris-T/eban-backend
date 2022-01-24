@@ -3,6 +3,7 @@ package cn.iris.server.service.impl;
 import cn.iris.server.pojo.Admin;
 import cn.iris.server.pojo.Menu;
 import cn.iris.server.mapper.MenuMapper;
+import cn.iris.server.pojo.Role;
 import cn.iris.server.service.IMenuService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,14 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
             valueOperations.set("menu_"+adminID, menus);
         }
         return menus;
+    }
+
+    /**
+     * 根据角色获取角色权限列表
+     * @return 权限列表
+     */
+    @Override
+    public List<Menu> getMenusWithRole() {
+        return menuMapper.getMenusWithRole();
     }
 }

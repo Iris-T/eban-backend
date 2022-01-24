@@ -1,4 +1,4 @@
-package cn.iris.server.config.security;
+package cn.iris.server.config.component;
 
 
 import io.jsonwebtoken.Claims;

@@ -1,4 +1,4 @@
-package cn.iris.server.config.security;
+package cn.iris.server.config.component;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
