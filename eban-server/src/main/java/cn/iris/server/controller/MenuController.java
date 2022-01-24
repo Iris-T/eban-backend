@@ -26,8 +26,6 @@ import java.util.List;
 public class MenuController {
 
     @Autowired
-    private IAdminService adminService;
-    @Autowired
     private IMenuService menuService;
 
     @ApiOperation(value = "通过用户ID查询菜单列表")

@@ -1,4 +1,4 @@
-package cn.iris.server.config;
+package cn.iris.server.config.component;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
