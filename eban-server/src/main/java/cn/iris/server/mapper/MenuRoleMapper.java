@@ -13,4 +13,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface MenuRoleMapper extends BaseMapper<MenuRole> {
 
+    /**
+     * 插入多条权限菜单
+     * @param rid 权限角色ID
+     * @param mids 菜单ID列表
+     * @return 受影响结果数
+     */
+    Integer insertRecord(Integer rid, Integer[] mids);
 }

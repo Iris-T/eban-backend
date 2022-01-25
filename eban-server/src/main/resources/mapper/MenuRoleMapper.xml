@@ -14,4 +14,12 @@
         id, mid, rid
     </sql>
 
+    <!-- 插入多条记录 -->
+    <insert id="insertRecord">
+        INSERT INTO t_menu_role(rid, mid) VALUES
+        <foreach collection="mids" item="mid" separator=",">
+            (#{mid},#{rid})
+        </foreach>
+    </insert>
+
 </mapper>

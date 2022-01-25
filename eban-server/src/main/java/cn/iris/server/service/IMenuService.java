@@ -1,7 +1,6 @@
 package cn.iris.server.service;
 
 import cn.iris.server.pojo.Menu;
-import cn.iris.server.pojo.Role;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -30,4 +29,9 @@ public interface IMenuService extends IService<Menu> {
      */
     List<Menu> getMenusWithRole();
 
+    /**
+     * 获取所有菜单
+     * @return 菜单列表
+     */
+    List<Menu> getAllMenus();
 }
