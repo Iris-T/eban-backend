@@ -29,14 +29,14 @@
     <dependency>
       <groupId>com.baomidou</groupId>
       <artifactId>mybatis-plus-boot-starter</artifactId>
-      <version>3.3.1</version>
+      <version>3.5.1</version>
     </dependency>
 
     <!--  mybatis-plus代码生成器依赖-->
     <dependency>
       <groupId>com.baomidou</groupId>
       <artifactId>mybatis-plus-generator</artifactId>
-      <version>3.3.1</version>
+      <version>3.5.1</version>
     </dependency>
 
     <!--  代码生成模板依赖-->
@@ -49,6 +49,7 @@
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.27</version>
     </dependency>
 
   </dependencies>
