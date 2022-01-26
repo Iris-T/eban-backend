@@ -15,6 +15,8 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
+import static cn.iris.server.utils.AdminUtils.getCurrentAdmin;
+
 /**
  * <p>
  *  服务实现类
@@ -38,7 +40,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
      */
     @Override
     public List<Menu> getMenuByAdminId() {
-        Integer adminID = ((Admin) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        Integer adminID = getCurrentAdmin().getId();
         ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
         // 在Redis中获取menus
         List<Menu> menus = (List<Menu>) valueOperations.get("menu_"+adminID);

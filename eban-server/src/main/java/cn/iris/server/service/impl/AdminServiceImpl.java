@@ -1,9 +1,11 @@
 package cn.iris.server.service.impl;
 
+import cn.iris.server.mapper.AdminRoleMapper;
 import cn.iris.server.mapper.RoleMapper;
 import cn.iris.server.pojo.Admin;
 import cn.iris.server.mapper.AdminMapper;
 import cn.iris.server.config.component.JwtTokenUtil;
+import cn.iris.server.pojo.AdminRole;
 import cn.iris.server.pojo.RespBean;
 import cn.iris.server.pojo.Role;
 import cn.iris.server.service.IAdminService;
@@ -17,12 +19,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static cn.iris.server.utils.AdminUtils.getCurrentAdmin;
 
 /**
  * <p>
@@ -47,6 +53,8 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     private String tokenHead;
     @Autowired
     private RoleMapper roleMapper;
+    @Autowired
+    private AdminRoleMapper adminRoleMapper;
 
     @Override
     public RespBean login(String username, String password, String code, HttpServletRequest req) {
@@ -102,5 +110,44 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     @Override
     public List<Role> getRoles(Integer adminId) {
         return roleMapper.getRoles(adminId);
+    }
+
+    /**
+     * 获取全部操作员
+     * @param keywords 关键词
+     * @return 操作员列表
+     */
+    @Override
+    public List<Admin> getAllAdmins(String keywords) {
+        return adminMapper.getAllAdmins(getCurrentAdmin().getId(), keywords);
+    }
+
+    /**
+     * 删除adminId对应的全部角色
+     * @param adminId 操作员ID
+     */
+    @Override
+    public void delAdminRole(Integer adminId) {
+        adminRoleMapper.delete(new QueryWrapper<AdminRole>().eq("adminId",adminId));
+    }
+
+    /**
+     * 更新操作员角色
+     * @param adminId 操作员ID
+     * @param rids 角色ID列表
+     * @return 自定义响应信息
+     */
+    @Override
+    @Transactional
+    public RespBean updateAdminRole(Integer adminId, Integer[] rids) {
+        // 先将操作员对应角色全部删除
+        adminRoleMapper.delete(new QueryWrapper<AdminRole>().eq("adminId",adminId));
+        // 添加操作员对应角色
+        Integer res = adminRoleMapper.addAdminRole(adminId, rids);
+        //更新行数相同则成功
+        if (rids.length==res) {
+            return RespBean.success("更新成功!");
+        }
+        return RespBean.error("更新失败!");
     }
 }
