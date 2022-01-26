@@ -16,7 +16,7 @@
 
     <!-- 插入多条记录 -->
     <insert id="insertRecord">
-        INSERT INTO t_menu_role(rid, mid) VALUES
+        INSERT INTO t_menu_role(mid, rid) VALUES
         <foreach collection="mids" item="mid" separator=",">
             (#{mid},#{rid})
         </foreach>

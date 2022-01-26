@@ -2,6 +2,7 @@ package cn.iris.server.mapper;
 
 import cn.iris.server.pojo.MenuRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -19,5 +20,5 @@ public interface MenuRoleMapper extends BaseMapper<MenuRole> {
      * @param mids 菜单ID列表
      * @return 受影响结果数
      */
-    Integer insertRecord(Integer rid, Integer[] mids);
+    Integer insertRecord(@Param("rid") Integer rid, Integer[] mids);
 }
