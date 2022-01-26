@@ -4,17 +4,46 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="cn.iris.server.pojo.Department">
-        <id column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="parentId" property="parentId" />
-        <result column="depPath" property="depPath" />
-        <result column="enabled" property="enabled" />
-        <result column="isParent" property="isParent" />
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="parentId" property="parentId"/>
+        <result column="depPath" property="depPath"/>
+        <result column="enabled" property="enabled"/>
+        <result column="isParent" property="isParent"/>
+    </resultMap>
+
+    <resultMap id="DepChildren" type="cn.iris.server.pojo.Department" extends="BaseResultMap">
+        <collection property="children" ofType="cn.iris.server.pojo.Department"
+                    select="cn.iris.server.mapper.DepartmentMapper.getAllDeps" column="id">
+        </collection>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, name, parentId, depPath, enabled, isParent
     </sql>
+
+    <!-- 删除部门 -->
+    <select id="delDep" statementType="CALLABLE">
+        call delDep(#{id,mode=IN,jdbcType=INTEGER},
+                       #{result,mode=OUT,jdbcType=INTEGER})
+    </select>
+
+    <!-- 添加部门 -->
+    <select id="addDep" statementType="CALLABLE">
+        call addDep(#{name,mode=IN,jdbcType=VARCHAR},
+                    #{parentId,mode=IN,jdbcType=INTEGER},
+                    #{enabled,mode=IN,jdbcType=BOOLEAN},
+                    #{result,mode=OUT,jdbcType=INTEGER},
+                    #{id,mode=OUT,jdbcType=INTEGER})
+    </select>
+
+    <!-- 获取所有部门信息 -->
+    <select id="getAllDeps" resultMap="DepChildren">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_department
+        WHERE parentId = #{parentId}
+    </select>
 
 </mapper>
