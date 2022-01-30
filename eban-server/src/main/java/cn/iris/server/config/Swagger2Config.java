@@ -1,4 +1,4 @@
-package cn.iris.server.config.component;
+package cn.iris.server.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

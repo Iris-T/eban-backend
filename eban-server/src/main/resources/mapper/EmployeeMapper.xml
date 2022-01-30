@@ -4,40 +4,114 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="cn.iris.server.pojo.Employee">
-        <id column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="gender" property="gender" />
-        <result column="birthday" property="birthday" />
-        <result column="idCard" property="idCard" />
-        <result column="wedlock" property="wedlock" />
-        <result column="nationId" property="nationId" />
-        <result column="nativePlace" property="nativePlace" />
-        <result column="politicId" property="politicId" />
-        <result column="email" property="email" />
-        <result column="phone" property="phone" />
-        <result column="address" property="address" />
-        <result column="departmentId" property="departmentId" />
-        <result column="jobLevelId" property="jobLevelId" />
-        <result column="posId" property="posId" />
-        <result column="engageForm" property="engageForm" />
-        <result column="tiptopDegree" property="tiptopDegree" />
-        <result column="specialty" property="specialty" />
-        <result column="school" property="school" />
-        <result column="beginDate" property="beginDate" />
-        <result column="workState" property="workState" />
-        <result column="workID" property="workID" />
-        <result column="contractTerm" property="contractTerm" />
-        <result column="conversionTime" property="conversionTime" />
-        <result column="notWorkDate" property="notWorkDate" />
-        <result column="beginContract" property="beginContract" />
-        <result column="endContract" property="endContract" />
-        <result column="workAge" property="workAge" />
-        <result column="salaryId" property="salaryId" />
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="gender" property="gender"/>
+        <result column="birthday" property="birthday"/>
+        <result column="idCard" property="idCard"/>
+        <result column="wedlock" property="wedlock"/>
+        <result column="nationId" property="nationId"/>
+        <result column="nativePlace" property="nativePlace"/>
+        <result column="politicId" property="politicId"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <result column="address" property="address"/>
+        <result column="departmentId" property="departmentId"/>
+        <result column="jobLevelId" property="jobLevelId"/>
+        <result column="posId" property="posId"/>
+        <result column="engageForm" property="engageForm"/>
+        <result column="tiptopDegree" property="tiptopDegree"/>
+        <result column="specialty" property="specialty"/>
+        <result column="school" property="school"/>
+        <result column="beginDate" property="beginDate"/>
+        <result column="workState" property="workState"/>
+        <result column="workID" property="workID"/>
+        <result column="contractTerm" property="contractTerm"/>
+        <result column="conversionTime" property="conversionTime"/>
+        <result column="notWorkDate" property="notWorkDate"/>
+        <result column="beginContract" property="beginContract"/>
+        <result column="endContract" property="endContract"/>
+        <result column="workAge" property="workAge"/>
+        <result column="salaryId" property="salaryId"/>
+    </resultMap>
+
+    <resultMap id="EmpInfo" type="cn.iris.server.pojo.Employee" extends="BaseResultMap">
+        <collection property="nation" javaType="cn.iris.server.pojo.Nation">
+            <id column="nid" property="id"/>
+            <result column="nname" property="name"/>
+        </collection>
+        <collection property="politicsStatus" javaType="cn.iris.server.pojo.PoliticsStatus">
+            <id column="pid" property="id"/>
+            <result column="panme" property="name"/>
+        </collection>
+        <collection property="department" javaType="cn.iris.server.pojo.Department">
+            <id column="did" property="id"/>
+            <result column="dname" property="name"/>
+        </collection>
+        <collection property="joblevel" javaType="cn.iris.server.pojo.Joblevel">
+            <id column="jid" property="id"/>
+            <result column="jname" property="name"/>
+        </collection>
+        <collection property="position" javaType="cn.iris.server.pojo.Position">
+            <id column="posid" property="id"/>
+            <result column="posname" property="name"/>
+        </collection>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, name, gender, birthday, idCard, wedlock, nationId, nativePlace, politicId, email, phone, address, departmentId, jobLevelId, posId, engageForm, tiptopDegree, specialty, school, beginDate, workState, workID, contractTerm, conversionTime, notWorkDate, beginContract, endContract, workAge, salaryId
     </sql>
+
+    <!-- 分页查询员工信息  -->
+    <select id="getEmployeeByPage" resultMap="EmpInfo">
+        SELECT e.*,
+        n.id AS nid,
+        n.`name` AS nname,
+        p.id AS psid,
+        p.`name` AS psname,
+        d.id AS did,
+        d.`name` AS dname,
+        j.id AS jid,
+        j.`name` AS jname,
+        pos.id AS posid,
+        pos.`name` AS posname
+        FROM t_employee e,
+        t_nation n,
+        t_politics_status p,
+        t_department d,
+        t_joblevel j,
+        t_position pos
+        WHERE e.nationId = n.id
+        AND e.politicId = p.id
+        AND e.departmentId = d.id
+        AND e.jobLevelId = j.id
+        AND e.posId = pos.id
+        <if test="null!=employee.name and ''!=employee.name">
+            AND e.`name` LIKE CONCAT('%', #{employee.name}, '%')
+        </if>
+        <if test="null!=employee.politicId">
+            AND e.politicId = #{employee.politicId}
+        </if>
+        <if test="null!=employee.nationId">
+            AND e.nationId = #{employee.nationId}
+        </if>
+        <if test="null!=employee.jobLevelId">
+            AND e.jobLevelId = #{employee.jobLevelId}
+        </if>
+        <if test="null!=employee.posId">
+            AND e.posId = #{employee.posId}
+        </if>
+        <if test="null!=employee.engageForm and ''!=employee.engageForm">
+            AND e.engageForm = #{employee.engageForm}
+        </if>
+        <if test="null!=employee.departmentId">
+            AND e.departmentId = #{employee.departmentId}
+        </if>
+        <if test="null!=beginDateScope and 2==beginDateScope.length">
+            AND e.beginDate BETWEEN #{beginDateScope[0]} AND #{beginDateScope[1]}
+        </if>
+        ORDER BY e.id
+    </select>
 
 </mapper>
