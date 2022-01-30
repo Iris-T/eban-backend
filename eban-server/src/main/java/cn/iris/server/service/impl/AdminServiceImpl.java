@@ -142,6 +142,10 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     public RespBean updateAdminRole(Integer adminId, Integer[] rids) {
         // 先将操作员对应角色全部删除
         adminRoleMapper.delete(new QueryWrapper<AdminRole>().eq("adminId",adminId));
+        // 可能遇到删除全部权限，获取到的rids为null
+        if (ObjectUtils.isEmpty(rids)) {
+            return RespBean.success("更新成功!");
+        }
         // 添加操作员对应角色
         Integer res = adminRoleMapper.addAdminRole(adminId, rids);
         //更新行数相同则成功
