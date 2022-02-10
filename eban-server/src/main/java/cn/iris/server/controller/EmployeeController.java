@@ -2,7 +2,9 @@ package cn.iris.server.controller;
 
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import cn.iris.server.pojo.*;
 import cn.iris.server.service.*;
@@ -10,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -53,7 +56,7 @@ public class EmployeeController {
             // 筛选参数
             Employee employee,
             LocalDate[] beginDateScope) {
-        return employeeService.getEmployeeByPage(currentPage,pageSize,employee,beginDateScope);
+        return employeeService.getEmployeeByPage(currentPage, pageSize, employee, beginDateScope);
     }
 
     @ApiOperation(value = "获取所有政治面貌")
@@ -121,21 +124,21 @@ public class EmployeeController {
     public void exportEmp(HttpServletResponse resp) {
         List<Employee> infoList = employeeService.getEmp(null);
         /*使用03版本Excel，兼容性&导出速度*/
-        ExportParams exportParams = new ExportParams("员工信息表","员工信息表", ExcelType.HSSF);
+        ExportParams exportParams = new ExportParams("员工信息表", "员工信息表", ExcelType.HSSF);
         Workbook workbook = ExcelExportUtil.exportExcel(exportParams, Employee.class, infoList);
         ServletOutputStream out = null;
         try {
             /*以流的形式输出*/
             resp.setHeader("content-type", "application/octet-stream");
             /*防止中文乱码*/
-            resp.setHeader("content-disposition", "attachment;filename="+ URLEncoder.encode("员工信息表.xls", "utf-8"));
+            resp.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode("员工信息表.xls", "utf-8"));
             out = resp.getOutputStream();
             workbook.write(out);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             /*关闭资源*/
-            if (null!=out) {
+            if (null != out) {
                 try {
                     out.close();
                 } catch (IOException e) {
@@ -145,5 +148,37 @@ public class EmployeeController {
         }
     }
 
-
+    @ApiOperation(value = "导入员工数据")
+    @PostMapping(value = "/import")
+    public RespBean importEmp(MultipartFile file) {
+        ImportParams params = new ImportParams();
+        /*删除标题行（首行）*/
+        params.setTitleRows(1);
+        List<Nation> nations = nationService.list();
+        List<PoliticsStatus> politicsStatuses = politicsStatusService.list();
+        List<Department> departments = departmentService.list();
+        List<Joblevel> joblevels = joblevelService.list();
+        List<Position> positions = positionService.list();
+        try {
+            List<Employee> empInfos = ExcelImportUtil.importExcel(file.getInputStream(), Employee.class, params);
+            empInfos.forEach(employee -> {
+                        /*获取民族ID*/
+                        employee.setNationId(nations.get(nations.indexOf(new Nation(employee.getNation().getName()))).getId());
+                        /*获取政治面貌ID*/
+                        employee.setPoliticId(politicsStatuses.get(politicsStatuses.indexOf(new PoliticsStatus(employee.getPoliticsStatus().getName()))).getId());
+                        /*获取部门ID*/
+                        employee.setDepartmentId(departments.get(departments.indexOf(new Department(employee.getDepartment().getName()))).getId());
+                        /*获取职称ID*/
+                        employee.setJobLevelId(joblevels.get(joblevels.indexOf(new Joblevel(employee.getJoblevel().getName()))).getId());
+                        /*获取职位ID*/
+                        employee.setPosId(positions.get(positions.indexOf(new Position(employee.getPosition().getName()))).getId());
+                    });
+            if (employeeService.saveBatch(empInfos)) {
+                return RespBean.success("导入成功!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return RespBean.error("导入失败");
+    }
 }
