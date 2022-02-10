@@ -79,4 +79,14 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
         }
         return RespBean.error("添加失败!");
     }
+
+    /**
+     * 获取员工信息列表
+     * @param id 员工ID
+     * @return 员工信息列表
+     */
+    @Override
+    public List<Employee> getEmp(Integer id) {
+        return employeeMapper.getEmp(id);
+    }
 }

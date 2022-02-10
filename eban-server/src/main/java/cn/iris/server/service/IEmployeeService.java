@@ -6,6 +6,7 @@ import cn.iris.server.pojo.RespPageBean;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * <p>
@@ -38,4 +39,11 @@ public interface IEmployeeService extends IService<Employee> {
      * @return 自定义响应信息
      */
     RespBean addEmp(Employee emp);
+
+    /**
+     * 获取员工数据，用于导出
+     * @param id 员工ID
+     * @return 员工信息列表
+     */
+    List<Employee> getEmp(Integer id);
 }

@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * <p>
@@ -26,4 +27,11 @@ public interface EmployeeMapper extends BaseMapper<Employee> {
      * @return IPage
      */
     IPage<Employee> getEmployeeByPage(Page<Employee> page, @Param("employee") Employee employee,@Param("beginDateScope") LocalDate[] beginDateScope);
+
+    /**
+     * 获取员工信息列表
+     * @param id 员工ID
+     * @return 员工信息列表
+     */
+    List<Employee> getEmp(Integer id);
 }

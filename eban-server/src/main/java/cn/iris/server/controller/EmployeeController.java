@@ -1,12 +1,20 @@
 package cn.iris.server.controller;
 
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import cn.iris.server.pojo.*;
 import cn.iris.server.service.*;
 import io.swagger.annotations.ApiOperation;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -107,4 +115,35 @@ public class EmployeeController {
         }
         return RespBean.error("删除失败!");
     }
+
+    @ApiOperation(value = "导出员工数据")
+    @GetMapping(value = "/export", produces = "application/octet-stream")
+    public void exportEmp(HttpServletResponse resp) {
+        List<Employee> infoList = employeeService.getEmp(null);
+        /*使用03版本Excel，兼容性&导出速度*/
+        ExportParams exportParams = new ExportParams("员工信息表","员工信息表", ExcelType.HSSF);
+        Workbook workbook = ExcelExportUtil.exportExcel(exportParams, Employee.class, infoList);
+        ServletOutputStream out = null;
+        try {
+            /*以流的形式输出*/
+            resp.setHeader("content-type", "application/octet-stream");
+            /*防止中文乱码*/
+            resp.setHeader("content-disposition", "attachment;filename="+ URLEncoder.encode("员工信息表.xls", "utf-8"));
+            out = resp.getOutputStream();
+            workbook.write(out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            /*关闭资源*/
+            if (null!=out) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
 }
