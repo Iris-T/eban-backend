@@ -1,5 +1,6 @@
 package cn.iris.server.pojo;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -32,6 +33,7 @@ public class PoliticsStatus implements Serializable {
     private Integer id;
 
     @ApiModelProperty(value = "政治面貌")
+    @Excel(name = "政治面貌")
     private String name;
 
 
