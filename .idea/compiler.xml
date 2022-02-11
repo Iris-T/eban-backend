@@ -9,17 +9,20 @@
         <outputRelativeToContentRoot value="true" />
         <module name="eban-generator" />
         <module name="eban-server" />
+        <module name="eban-mail" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="eban-backend" target="1.8" />
       <module name="eban-generator" target="1.8" />
+      <module name="eban-mail" target="1.8" />
       <module name="eban-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="eban-generator" options="-parameters" />
+      <module name="eban-mail" options="-parameters" />
       <module name="eban-server" options="-parameters" />
     </option>
   </component>

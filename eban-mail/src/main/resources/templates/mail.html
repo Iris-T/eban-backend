@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.theymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>入职欢迎邮件</title>
+</head>
+<body>
+    欢迎 <span th:text="${name}"></span>加入Iris的团伙（不是）
+    <h1>入职信息</h1>
+    <table border="1">
+        <tr>
+            <td>姓名</td>
+            <td th:text="${name}"></td>
+        </tr>
+        <tr>
+            <td>职位</td>
+            <td th:text="${posName}"></td>
+        </tr>
+        <tr>
+            <td>职称</td>
+            <td th:text="${joblevelName}"></td>
+        </tr>
+        <tr>
+            <td>部门</td>
+            <td th:text="${depName}"></td>
+        </tr>
+    </table>
+<p>希望以后日子，你能抗住加班、熬夜以及007（没有加班费，别想了）</p>
+</body>
+</html>

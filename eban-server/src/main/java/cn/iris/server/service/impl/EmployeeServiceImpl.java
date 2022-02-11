@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,8 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
 
     @Autowired
     private EmployeeMapper employeeMapper;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     /**
      * 查询员工
@@ -75,6 +78,9 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
         emp.setContractTerm(Double.parseDouble(decimalFormat.format(days/365.00)));
 
         if (1==employeeMapper.insert(emp)) {
+            /*发送信息*/
+            Employee empNew = employeeMapper.getEmp(emp.getId()).get(0);
+            rabbitTemplate.convertAndSend("mail.welcome", empNew);
             return RespBean.success("添加成功!");
         }
         return RespBean.error("添加失败!");

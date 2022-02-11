@@ -5,6 +5,7 @@
     <modules>
         <module>eban-server</module>
         <module>eban-generator</module>
+        <module>eban-mail</module>
     </modules>
     <parent>
         <artifactId>spring-boot-starter-parent</artifactId>

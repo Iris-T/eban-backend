@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/eban-backend.iml" filepath="$PROJECT_DIR$/eban-backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/eban-generator/eban-generator.iml" filepath="$PROJECT_DIR$/eban-generator/eban-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eban-mail/eban-mail.iml" filepath="$PROJECT_DIR$/eban-mail/eban-mail.iml" />
       <module fileurl="file://$PROJECT_DIR$/eban-server/eban-server.iml" filepath="$PROJECT_DIR$/eban-server/eban-server.iml" />
     </modules>
   </component>

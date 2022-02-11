@@ -1,0 +1,16 @@
+server:
+  port: 8082
+spring:
+  mail:
+    host: smtp.163.com
+    protocol: smtp
+    default-encoding: UTF-8
+    password: MSAMUFNULBYRWPAW
+    username: supiris@163.com
+    port: 25
+  # rabbitmq配置
+  rabbitmq:
+    username: iris
+    password: foxiris@qq.com
+    host: 192.168.47.102
+    port: 5672
