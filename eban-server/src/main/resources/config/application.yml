@@ -43,6 +43,10 @@ spring:
     password: foxiris@qq.com
     host: 192.168.47.102
     port: 5672
+    # 开启消息确认回调
+    publisher-confirm-type: correlated
+    # 开启消息失败回调
+    publisher-returns: true
 
 mybatis-plus:
   #配置Mapper映射文件

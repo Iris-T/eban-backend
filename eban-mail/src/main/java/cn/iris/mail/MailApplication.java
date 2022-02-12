@@ -1,5 +1,6 @@
 package cn.iris.mail;
 
+import cn.iris.server.pojo.MailConstants;
 import org.springframework.amqp.core.Queue;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,6 +19,6 @@ public class MailApplication {
 
     @Bean
     public Queue queue() {
-        return new Queue("mail.welcome");
+        return new Queue(MailConstants.MAIL_QUEUE_NAME);
     }
 }
