@@ -1,3 +1,7 @@
 # eban-backend
-云e办后端API服务器，云办公管理系统，使用技术：Spring Boot，Spring Security等
-# 云e办后台API（服务器+API展示页面）
+### 当前包内容
+- 云e办后台API（服务器+API展示页面）
+### 涉及技术栈
+- Redis内存存储
+- RabbitMQ消息队列
+- Spring Security+Jwt令牌
